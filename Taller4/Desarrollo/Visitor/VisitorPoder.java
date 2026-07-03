@@ -4,7 +4,7 @@ import Dominio.*;
  * Implementación concreta del Visitor que calcula el poder de cada carta
  * según las reglas definidas para cada tipo.
  * 
- * @author Sutrostian y POOsandon
+ * @author Maiximiliano
  */
 public class VisitorPoder implements IVisitorPoder {
 
