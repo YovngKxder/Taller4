@@ -2,7 +2,7 @@ package Logica;
 
 import java.util.LinkedList;
 import Dominio.*;
-import strategy.IEstrategiaOrden;
+import Strategy.IEstrategiaOrden;
 
 /**
  * Implementación del sistema de administración de cartas.
