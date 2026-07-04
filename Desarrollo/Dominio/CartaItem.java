@@ -28,4 +28,9 @@ public class CartaItem extends Carta {
     public double aceptar(IVisitorPoder visitor) {
         return visitor.visitarItem(this);
     }
+    @Override
+    public String toLinea() {
+        return String.join(";", nombreCarta, String.valueOf(rareza), tipo,
+                String.valueOf(bonificacion));
+    }
 }
