@@ -1,6 +1,9 @@
 # Taller4
 Integrantes: Maximiliano Abd-El-Kader
+
 Docentes: Alejandro Paolini, Cristian Rabi, Juan Nilo.
+
 Ayudantes: Nicolás Rojas (Talleres), Catalina Galleguillos (Cátedra), Martín Droguett (Cátedra), Estefanía Ulloa (Cátedra).
+
 
 Este proyecto consiste en el desarrollo de un sistema de gestión para una colección de cartas de Pokémon TCG, donde cada carta pertenece a uno de cuatro tipos: Pokemon, Item, Supporter y Energy. El sistema fue desarrollado en Java aplicando los principios de Programación Orientada a Objetos, utilizando herencia para modelar los distintos tipos de carta a partir de una clase abstracta base, e interfaces para definir el contrato del sistema. La arquitectura separa el punto de entrada (Main) de la lógica de negocio (Sistema), aplicando además los patrones de diseño Singleton, Factory, Visitor y Strategy. La colección de cartas es gestionada mediante LinkedList, y toda la información es cargada al inicio desde el archivo de texto Sobres.txt, manteniéndose sincronizada con este archivo ante cualquier modificación mediante FileWriter. El sistema cuenta con dos ventanas: la ventana de Administración, que permite agregar, modificar y eliminar cartas, reflejando los cambios en el archivo correspondiente; y la ventana de Colección, que permite visualizar todas las cartas en formato de grilla junto a su imagen, ordenarlas por Rareza, Nombre o Poder, y ver el detalle ampliado de cada una con su puntuación calculada según fórmulas específicas para cada tipo de carta.
