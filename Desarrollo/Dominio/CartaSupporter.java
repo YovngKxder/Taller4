@@ -28,4 +28,9 @@ public class CartaSupporter extends Carta {
     public double aceptar(IVisitorPoder visitor) {
         return visitor.visitarSupporter(this);
     }
+    @Override
+    public String toLinea() {
+        return String.join(";", nombreCarta, String.valueOf(rareza), tipo,
+                String.valueOf(efectosPorTurno));
+    }
 }
