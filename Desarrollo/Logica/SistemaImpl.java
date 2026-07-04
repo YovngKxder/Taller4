@@ -1,6 +1,8 @@
 package Logica;
 
+import java.io.FileWriter;
 import java.util.LinkedList;
+import java.io.IOException;
 import Dominio.*;
 import Strategy.IEstrategiaOrden;
 
@@ -8,27 +10,23 @@ import Strategy.IEstrategiaOrden;
  * Implementación del sistema de administración de cartas.
  * Aplica el patrón Singleton para garantizar una única instancia
  * de la colección durante toda la ejecución del programa.
+ * Persiste automáticamente los cambios en Sobres.txt.
  * 
  * @author Maximiliano
  */
 public class SistemaImpl implements ISistema {
+
+    private static final String ruta = "Sobres.txt";
 
     private static SistemaImpl instancia;
 
     private LinkedList<Carta> listaCartas;
     private IEstrategiaOrden estrategiaOrden;
 
-    /**
-     * Constructor privado, evita instanciación externa (Singleton).
-     */
     private SistemaImpl() {
         listaCartas = new LinkedList<>();
     }
 
-    /**
-     * Retorna la única instancia del sistema, creándola si aún no existe.
-     * @return la instancia única de SistemaImpl
-     */
     public static SistemaImpl getInstance() {
         if (instancia == null) {
             instancia = new SistemaImpl();
@@ -40,11 +38,16 @@ public class SistemaImpl implements ISistema {
     public void agregarCarta(String linea) {
         Carta carta = CartaFactory.crearCartaDesdeLinea(linea);
         listaCartas.add(carta);
+        guardarArchivo();
     }
 
     @Override
     public boolean eliminarCarta(Carta carta) {
-        return listaCartas.remove(carta);
+        boolean eliminada = listaCartas.remove(carta);
+        if (eliminada) {
+            guardarArchivo();
+        }
+        return eliminada;
     }
 
     @Override
@@ -53,6 +56,7 @@ public class SistemaImpl implements ISistema {
             CartaPokemon pokemon = (CartaPokemon) carta;
             pokemon.setDaño(daño);
             pokemon.setCantEnergias(cantEnergias);
+            guardarArchivo();
         }
     }
 
@@ -61,6 +65,7 @@ public class SistemaImpl implements ISistema {
         if (carta instanceof CartaItem) {
             CartaItem item = (CartaItem) carta;
             item.setBonificacion(bonificacion);
+            guardarArchivo();
         }
     }
 
@@ -69,6 +74,7 @@ public class SistemaImpl implements ISistema {
         if (carta instanceof CartaSupporter) {
             CartaSupporter supporter = (CartaSupporter) carta;
             supporter.setEfectosPorTurno(efectosPorTurno);
+            guardarArchivo();
         }
     }
 
@@ -77,6 +83,7 @@ public class SistemaImpl implements ISistema {
         if (carta instanceof CartaEnergy) {
             CartaEnergy energy = (CartaEnergy) carta;
             energy.setElemento(elemento);
+            guardarArchivo();
         }
     }
 
@@ -91,5 +98,20 @@ public class SistemaImpl implements ISistema {
     @Override
     public void setEstrategiaOrden(IEstrategiaOrden estrategia) {
         this.estrategiaOrden = estrategia;
+    }
+
+    /**
+     * Sobrescribe Sobres.txt con el estado actual de la colección,
+     * manteniendo el formato original NombreCarta;Rareza;Tipo;...
+     * Se llama automáticamente tras cada operación CRUD.
+     */
+    private void guardarArchivo() {
+        try (FileWriter writer = new FileWriter(ruta)) {
+            for (Carta carta : listaCartas) {
+                writer.write(carta.toLinea() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.out.println("Error al guardar el archivo: " + e.getMessage());
+        }
     }
 }
