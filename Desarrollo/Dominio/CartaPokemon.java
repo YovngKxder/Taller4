@@ -38,4 +38,9 @@ public class CartaPokemon extends Carta {
     public double aceptar(IVisitorPoder visitor) {
         return visitor.visitarPokemon(this);
     }
+    @Override
+    public String toLinea() {
+        return String.join(";", nombreCarta, String.valueOf(rareza), tipo,
+                String.valueOf(daño), String.valueOf(cantEnergias));
+    }
 }
