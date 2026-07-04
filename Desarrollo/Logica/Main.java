@@ -1,3 +1,4 @@
+//Maximiliano Edhin Abd-El-Kader Gongora, 22.128.215-9, Ingeniería Civil en Computación e Informática (ICCI)
 package Logica;
 
 
@@ -16,7 +17,6 @@ import gui.VentanaAdministracion;
 public class Main {
 
     public static void main(String[] args) {
-        //Maximiliano Abd-El-Kader 22.128.215-9
         ISistema sistema = SistemaImpl.getInstance();
 
         try {
