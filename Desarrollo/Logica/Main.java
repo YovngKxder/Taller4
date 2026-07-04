@@ -24,7 +24,7 @@ public class Main {
 
             while (sc.hasNextLine()) {
                 String linea = sc.nextLine();
-                if (!linea.isBlank()) {
+                if (linea != null) {
                     sistema.agregarCarta(linea);
                 }
             }
