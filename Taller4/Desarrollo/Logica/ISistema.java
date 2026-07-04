@@ -1,8 +1,8 @@
 package Logica;
 
 import java.util.LinkedList;
-import dominio.Carta;
-import strategy.IEstrategiaOrden;
+import Dominio.Carta;
+import Strategy.IEstrategiaOrden;
 
 /**
  * Define las operaciones principales del sistema de administración
