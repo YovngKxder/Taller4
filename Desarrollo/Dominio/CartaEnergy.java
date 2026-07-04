@@ -28,4 +28,8 @@ public class CartaEnergy extends Carta {
     public double aceptar(IVisitorPoder visitor) {
         return visitor.visitarEnergy(this);
     }
+    @Override
+    public String toLinea() {
+        return String.join(";", nombreCarta, String.valueOf(rareza), tipo, elemento);
+    }
 }
